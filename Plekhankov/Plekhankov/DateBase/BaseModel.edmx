@@ -1,0 +1,474 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище Plekhankov_DemoEkzModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FIO" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="dogovor" Type="int" Nullable="false" />
+          <Property Name="date_pokupki" Type="date" Nullable="false" />
+          <Property Name="phone" Type="nvarchar" MaxLength="11" Nullable="false" />
+          <Property Name="adres" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="id_model" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Modeli_auto">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name_model" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="color" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="obivka" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="date_vipuska" Type="date" Nullable="false" />
+          <Property Name="kolvo_door" Type="nchar" MaxLength="10" />
+          <Property Name="mochnost" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="korobka_peredach" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="price" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="nacenki">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="type" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="znachenie" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Postavchiki">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name_firma" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="phone" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="adress_site" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="postavka">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_postavchik" Type="int" Nullable="false" />
+          <Property Name="id_model" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="priceKurant">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_model" Type="int" Nullable="false" />
+          <Property Name="price" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sdelka">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_client" Type="int" Nullable="false" />
+          <Property Name="id_model" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK_postavka_Modeli_auto">
+          <End Role="Modeli_auto" Type="Self.Modeli_auto" Multiplicity="1" />
+          <End Role="postavka" Type="Self.postavka" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Modeli_auto">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="postavka">
+              <PropertyRef Name="id_model" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_postavka_Postavchiki">
+          <End Role="Postavchiki" Type="Self.Postavchiki" Multiplicity="1" />
+          <End Role="postavka" Type="Self.postavka" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Postavchiki">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="postavka">
+              <PropertyRef Name="id_postavchik" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_priceKurant_Modeli_auto">
+          <End Role="Modeli_auto" Type="Self.Modeli_auto" Multiplicity="1" />
+          <End Role="priceKurant" Type="Self.priceKurant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Modeli_auto">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="priceKurant">
+              <PropertyRef Name="id_model" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sdelka_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Sdelka" Type="Self.Sdelka" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Sdelka">
+              <PropertyRef Name="id_client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sdelka_Modeli_auto">
+          <End Role="Modeli_auto" Type="Self.Modeli_auto" Multiplicity="1" />
+          <End Role="Sdelka" Type="Self.Sdelka" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Modeli_auto">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Sdelka">
+              <PropertyRef Name="id_model" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище Plekhankov_DemoEkzModelContainer">
+          <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Modeli_auto" EntityType="Self.Modeli_auto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="nacenki" EntityType="Self.nacenki" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Postavchiki" EntityType="Self.Postavchiki" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="postavka" EntityType="Self.postavka" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="priceKurant" EntityType="Self.priceKurant" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sdelka" EntityType="Self.Sdelka" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_postavka_Modeli_auto" Association="Self.FK_postavka_Modeli_auto">
+            <End Role="Modeli_auto" EntitySet="Modeli_auto" />
+            <End Role="postavka" EntitySet="postavka" />
+          </AssociationSet>
+          <AssociationSet Name="FK_postavka_Postavchiki" Association="Self.FK_postavka_Postavchiki">
+            <End Role="Postavchiki" EntitySet="Postavchiki" />
+            <End Role="postavka" EntitySet="postavka" />
+          </AssociationSet>
+          <AssociationSet Name="FK_priceKurant_Modeli_auto" Association="Self.FK_priceKurant_Modeli_auto">
+            <End Role="Modeli_auto" EntitySet="Modeli_auto" />
+            <End Role="priceKurant" EntitySet="priceKurant" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sdelka_Client" Association="Self.FK_Sdelka_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Sdelka" EntitySet="Sdelka" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sdelka_Modeli_auto" Association="Self.FK_Sdelka_Modeli_auto">
+            <End Role="Modeli_auto" EntitySet="Modeli_auto" />
+            <End Role="Sdelka" EntitySet="Sdelka" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Plekhankov_DemoEkzModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FIO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="dogovor" Type="Int32" Nullable="false" />
+          <Property Name="date_pokupki" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="phone" Type="String" MaxLength="11" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="adres" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="id_model" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Sdelka" Relationship="Self.FK_Sdelka_Client" FromRole="Client" ToRole="Sdelka" />
+        </EntityType>
+        <EntityType Name="Modeli_auto">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name_model" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="color" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="obivka" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="date_vipuska" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="kolvo_door" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="mochnost" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="korobka_peredach" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="price" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="postavka" Relationship="Self.FK_postavka_Modeli_auto" FromRole="Modeli_auto" ToRole="postavka" />
+          <NavigationProperty Name="priceKurant" Relationship="Self.FK_priceKurant_Modeli_auto" FromRole="Modeli_auto" ToRole="priceKurant" />
+          <NavigationProperty Name="Sdelka" Relationship="Self.FK_Sdelka_Modeli_auto" FromRole="Modeli_auto" ToRole="Sdelka" />
+        </EntityType>
+        <EntityType Name="nacenki">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="znachenie" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Postavchiki">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name_firma" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="adress_site" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="postavka" Relationship="Self.FK_postavka_Postavchiki" FromRole="Postavchiki" ToRole="postavka" />
+        </EntityType>
+        <EntityType Name="postavka">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_postavchik" Type="Int32" Nullable="false" />
+          <Property Name="id_model" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Modeli_auto" Relationship="Self.FK_postavka_Modeli_auto" FromRole="postavka" ToRole="Modeli_auto" />
+          <NavigationProperty Name="Postavchiki" Relationship="Self.FK_postavka_Postavchiki" FromRole="postavka" ToRole="Postavchiki" />
+        </EntityType>
+        <EntityType Name="priceKurant">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_model" Type="Int32" Nullable="false" />
+          <Property Name="price" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Modeli_auto" Relationship="Self.FK_priceKurant_Modeli_auto" FromRole="priceKurant" ToRole="Modeli_auto" />
+        </EntityType>
+        <EntityType Name="Sdelka">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_client" Type="Int32" Nullable="false" />
+          <Property Name="id_model" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_Sdelka_Client" FromRole="Sdelka" ToRole="Client" />
+          <NavigationProperty Name="Modeli_auto" Relationship="Self.FK_Sdelka_Modeli_auto" FromRole="Sdelka" ToRole="Modeli_auto" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_Sdelka_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Sdelka" Type="Self.Sdelka" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Sdelka">
+              <PropertyRef Name="id_client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_postavka_Modeli_auto">
+          <End Role="Modeli_auto" Type="Self.Modeli_auto" Multiplicity="1" />
+          <End Role="postavka" Type="Self.postavka" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Modeli_auto">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="postavka">
+              <PropertyRef Name="id_model" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_priceKurant_Modeli_auto">
+          <End Role="Modeli_auto" Type="Self.Modeli_auto" Multiplicity="1" />
+          <End Role="priceKurant" Type="Self.priceKurant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Modeli_auto">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="priceKurant">
+              <PropertyRef Name="id_model" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sdelka_Modeli_auto">
+          <End Role="Modeli_auto" Type="Self.Modeli_auto" Multiplicity="1" />
+          <End Role="Sdelka" Type="Self.Sdelka" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Modeli_auto">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Sdelka">
+              <PropertyRef Name="id_model" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_postavka_Postavchiki">
+          <End Role="Postavchiki" Type="Self.Postavchiki" Multiplicity="1" />
+          <End Role="postavka" Type="Self.postavka" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Postavchiki">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="postavka">
+              <PropertyRef Name="id_postavchik" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Plekhankov_DemoEkzEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Client" EntityType="Self.Client" />
+          <EntitySet Name="Modeli_auto" EntityType="Self.Modeli_auto" />
+          <EntitySet Name="nacenki" EntityType="Self.nacenki" />
+          <EntitySet Name="Postavchiki" EntityType="Self.Postavchiki" />
+          <EntitySet Name="postavka" EntityType="Self.postavka" />
+          <EntitySet Name="priceKurant" EntityType="Self.priceKurant" />
+          <EntitySet Name="Sdelka" EntityType="Self.Sdelka" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <AssociationSet Name="FK_Sdelka_Client" Association="Self.FK_Sdelka_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Sdelka" EntitySet="Sdelka" />
+          </AssociationSet>
+          <AssociationSet Name="FK_postavka_Modeli_auto" Association="Self.FK_postavka_Modeli_auto">
+            <End Role="Modeli_auto" EntitySet="Modeli_auto" />
+            <End Role="postavka" EntitySet="postavka" />
+          </AssociationSet>
+          <AssociationSet Name="FK_priceKurant_Modeli_auto" Association="Self.FK_priceKurant_Modeli_auto">
+            <End Role="Modeli_auto" EntitySet="Modeli_auto" />
+            <End Role="priceKurant" EntitySet="priceKurant" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sdelka_Modeli_auto" Association="Self.FK_Sdelka_Modeli_auto">
+            <End Role="Modeli_auto" EntitySet="Modeli_auto" />
+            <End Role="Sdelka" EntitySet="Sdelka" />
+          </AssociationSet>
+          <AssociationSet Name="FK_postavka_Postavchiki" Association="Self.FK_postavka_Postavchiki">
+            <End Role="Postavchiki" EntitySet="Postavchiki" />
+            <End Role="postavka" EntitySet="postavka" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище Plekhankov_DemoEkzModelContainer" CdmEntityContainer="Plekhankov_DemoEkzEntities">
+          <EntitySetMapping Name="Client">
+            <EntityTypeMapping TypeName="Plekhankov_DemoEkzModel.Client">
+              <MappingFragment StoreEntitySet="Client">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="FIO" ColumnName="FIO" />
+                <ScalarProperty Name="dogovor" ColumnName="dogovor" />
+                <ScalarProperty Name="date_pokupki" ColumnName="date_pokupki" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="adres" ColumnName="adres" />
+                <ScalarProperty Name="id_model" ColumnName="id_model" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Modeli_auto">
+            <EntityTypeMapping TypeName="Plekhankov_DemoEkzModel.Modeli_auto">
+              <MappingFragment StoreEntitySet="Modeli_auto">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name_model" ColumnName="name_model" />
+                <ScalarProperty Name="color" ColumnName="color" />
+                <ScalarProperty Name="obivka" ColumnName="obivka" />
+                <ScalarProperty Name="date_vipuska" ColumnName="date_vipuska" />
+                <ScalarProperty Name="kolvo_door" ColumnName="kolvo_door" />
+                <ScalarProperty Name="mochnost" ColumnName="mochnost" />
+                <ScalarProperty Name="korobka_peredach" ColumnName="korobka_peredach" />
+                <ScalarProperty Name="price" ColumnName="price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="nacenki">
+            <EntityTypeMapping TypeName="Plekhankov_DemoEkzModel.nacenki">
+              <MappingFragment StoreEntitySet="nacenki">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="znachenie" ColumnName="znachenie" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Postavchiki">
+            <EntityTypeMapping TypeName="Plekhankov_DemoEkzModel.Postavchiki">
+              <MappingFragment StoreEntitySet="Postavchiki">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name_firma" ColumnName="name_firma" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="adress_site" ColumnName="adress_site" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="postavka">
+            <EntityTypeMapping TypeName="Plekhankov_DemoEkzModel.postavka">
+              <MappingFragment StoreEntitySet="postavka">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_postavchik" ColumnName="id_postavchik" />
+                <ScalarProperty Name="id_model" ColumnName="id_model" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="priceKurant">
+            <EntityTypeMapping TypeName="Plekhankov_DemoEkzModel.priceKurant">
+              <MappingFragment StoreEntitySet="priceKurant">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_model" ColumnName="id_model" />
+                <ScalarProperty Name="price" ColumnName="price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sdelka">
+            <EntityTypeMapping TypeName="Plekhankov_DemoEkzModel.Sdelka">
+              <MappingFragment StoreEntitySet="Sdelka">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="id_client" ColumnName="id_client" />
+                <ScalarProperty Name="id_model" ColumnName="id_model" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="Plekhankov_DemoEkzModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

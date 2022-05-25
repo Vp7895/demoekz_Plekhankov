@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище Plekhankov_DemoEkzModelContainer" CdmEntityContainer="Plekhankov_DemoEkzEntities">
+    <EntitySetMapping Name="Client">
+      <EntityTypeMapping TypeName="Plekhankov_DemoEkzModel.Client">
+        <MappingFragment StoreEntitySet="Client">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="FIO" ColumnName="FIO" />
+          <ScalarProperty Name="dogovor" ColumnName="dogovor" />
+          <ScalarProperty Name="date_pokupki" ColumnName="date_pokupki" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+          <ScalarProperty Name="adres" ColumnName="adres" />
+          <ScalarProperty Name="id_model" ColumnName="id_model" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Modeli_auto">
+      <EntityTypeMapping TypeName="Plekhankov_DemoEkzModel.Modeli_auto">
+        <MappingFragment StoreEntitySet="Modeli_auto">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name_model" ColumnName="name_model" />
+          <ScalarProperty Name="color" ColumnName="color" />
+          <ScalarProperty Name="obivka" ColumnName="obivka" />
+          <ScalarProperty Name="date_vipuska" ColumnName="date_vipuska" />
+          <ScalarProperty Name="kolvo_door" ColumnName="kolvo_door" />
+          <ScalarProperty Name="mochnost" ColumnName="mochnost" />
+          <ScalarProperty Name="korobka_peredach" ColumnName="korobka_peredach" />
+          <ScalarProperty Name="price" ColumnName="price" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="nacenki">
+      <EntityTypeMapping TypeName="Plekhankov_DemoEkzModel.nacenki">
+        <MappingFragment StoreEntitySet="nacenki">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="type" ColumnName="type" />
+          <ScalarProperty Name="znachenie" ColumnName="znachenie" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Postavchiki">
+      <EntityTypeMapping TypeName="Plekhankov_DemoEkzModel.Postavchiki">
+        <MappingFragment StoreEntitySet="Postavchiki">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name_firma" ColumnName="name_firma" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="adress_site" ColumnName="adress_site" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="postavka">
+      <EntityTypeMapping TypeName="Plekhankov_DemoEkzModel.postavka">
+        <MappingFragment StoreEntitySet="postavka">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="id_postavchik" ColumnName="id_postavchik" />
+          <ScalarProperty Name="id_model" ColumnName="id_model" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="priceKurant">
+      <EntityTypeMapping TypeName="Plekhankov_DemoEkzModel.priceKurant">
+        <MappingFragment StoreEntitySet="priceKurant">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="id_model" ColumnName="id_model" />
+          <ScalarProperty Name="price" ColumnName="price" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sdelka">
+      <EntityTypeMapping TypeName="Plekhankov_DemoEkzModel.Sdelka">
+        <MappingFragment StoreEntitySet="Sdelka">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="id_client" ColumnName="id_client" />
+          <ScalarProperty Name="id_model" ColumnName="id_model" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="Plekhankov_DemoEkzModel.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

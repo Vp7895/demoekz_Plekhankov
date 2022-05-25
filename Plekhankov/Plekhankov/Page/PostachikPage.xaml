@@ -1,0 +1,40 @@
+﻿<Window x:Class="Plekhankov.Page.PostachikPage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Plekhankov.Page"
+        mc:Ignorable="d"
+        Title="Поставщики" Height="450" Width="800" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Background="Cyan">
+            <TextBlock Text="Автосалон" Style="{StaticResource zag}"/>
+            <Button Content="Вернуться назад" HorizontalAlignment="Right" VerticalAlignment="Center" Name="BackBtn" Style="{StaticResource btn}" Click="BackBtn_Click"/>
+        </Grid>
+
+        <DataGrid Name="DataGridPost"  Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Наименование" Binding="{Binding name_firma}" Width="*"/>
+                <DataGridTextColumn Header="Телефон" Binding="{Binding phone}" Width="*"/>
+                <DataGridTextColumn Header="Почта" Binding="{Binding email}" Width="*"/>
+                <DataGridTextColumn Header="Сайт" Binding="{Binding adress_site}" Width="*"/>
+                <DataGridTemplateColumn Width="auto">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button x:Name="EditBtn" Content="Редактировать" Style="{StaticResource btn}" Click="EditBtn_Click"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Grid Background="Goldenrod"  Grid.Row="2"/>
+
+    </Grid>
+</Window>
