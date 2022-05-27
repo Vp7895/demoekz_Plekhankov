@@ -32,5 +32,40 @@ namespace Plekhankov
             PostPage.Show();
             Close();
         }
+
+        private void ModelAuto_Click(object sender, RoutedEventArgs e)
+        {
+            Window AutoPage = new ModelAutoPage();
+            AutoPage.Show();
+            Close();
+        }
+
+        private void Clientbtn_Click(object sender, RoutedEventArgs e)
+        {
+            Window ClientBtn = new ClientPage();
+            ClientBtn.Show();
+            Close();
+        }
+
+        private void SdelkaBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Window SdelkaWndw = new SdelkaPage();
+            SdelkaWndw.Show();
+            Close();
+        }
+
+        private void PriceCurantbtn_Click(object sender, RoutedEventArgs e)
+        {
+            Window PriceCurant = new PriceCurantPage();
+            PriceCurant.Show();
+            Close();
+        }
+
+        private void Nacenkibtn_Click(object sender, RoutedEventArgs e)
+        {
+            Window Nacenki = new NacenkiPage();
+            Nacenki.Show();
+            Close();
+        }
     }
 }

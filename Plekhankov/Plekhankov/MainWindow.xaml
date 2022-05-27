@@ -21,17 +21,17 @@
        
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" >
             <Button Content="Поставщики" Style="{StaticResource btn}" Name="postavchikiBtn" Click="postavchikiBtn_Click"/>
-                <Button Content="Модели авто" Style="{StaticResource btn}"/>
+                <Button Name="ModelAuto" Content="Модели авто" Style="{StaticResource btn}" Click="ModelAuto_Click"/>
         </StackPanel>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" >
-                <Button Content="Клиенты" Style="{StaticResource btn}"/>
-                <Button Content="Прайскурант" Style="{StaticResource btn}"/>
+                <Button Content="Клиенты" Style="{StaticResource btn}" Name="Clientbtn" Click="Clientbtn_Click"/>
+                <Button Content="Прайскурант" Style="{StaticResource btn}" Name="PriceCurantbtn" Click="PriceCurantbtn_Click"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" >
-                <Button Content="Наценки" Style="{StaticResource btn}"/>
-                <Button Content="Сделки" Style="{StaticResource btn}"/>
+                <Button Content="Наценки" Style="{StaticResource btn}" Name="Nacenkibtn" Click="Nacenkibtn_Click"/>
+                <Button Content="Сделки" Style="{StaticResource btn}" Name="SdelkaBtn" Click="SdelkaBtn_Click"/>
             </StackPanel>
             
         </StackPanel>
