@@ -115,6 +115,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Page\AddEditPage\AddEditNacenkiPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Page\AddEditPage\AddEditSdelkaPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Page\ClientPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -141,6 +149,12 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Page\AddEditPage\AddEditNacenkiPage.xaml.cs">
+      <DependentUpon>AddEditNacenkiPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Page\AddEditPage\AddEditSdelkaPage.xaml.cs">
+      <DependentUpon>AddEditSdelkaPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Page\ClientPage.xaml.cs">
       <DependentUpon>ClientPage.xaml</DependentUpon>
     </Compile>

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Plekhankov.DateBase;
+using Plekhankov.Page.AddEditPage;
 
 namespace Plekhankov.Page
 {
@@ -32,6 +33,22 @@ namespace Plekhankov.Page
             Window Back = new MainWindow();
             Back.Show();
             Close();
+        }
+
+        private void AddSdelka_Click(object sender, RoutedEventArgs e)
+        {
+            Window addSdelka = new AddEditSdelkaPage();
+            addSdelka.Show();
+            Close();
+        }
+
+        private void Window_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if(Visibility == Visibility.Visible)
+            {
+                Plekhankov_DemoEkzEntities.GetContext().ChangeTracker.Entries().ToList().ForEach(p => p.Reload());
+                DgridSdelka.ItemsSource = Plekhankov_DemoEkzEntities.GetContext().Sdelka.ToList();
+            }
         }
     }
 }

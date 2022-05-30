@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Plekhankov.Page"
         mc:Ignorable="d"
-        Title="SdelkaPage" Height="450" Width="800" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+        Title="SdelkaPage" Height="450" Width="800" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" IsVisibleChanged="Window_IsVisibleChanged">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
@@ -36,7 +36,7 @@
 
         <Grid Grid.Row="2" Background="Goldenrod">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button Name="AddSdelka" Content="Добавить" Style="{StaticResource btn}"/>
+                <Button Name="AddSdelka" Content="Добавить" Style="{StaticResource btn}" Click="AddSdelka_Click"/>
                 <Button Name="DltSdelka" Content="Удалить" Style="{StaticResource btn}"/>
             </StackPanel>
         </Grid>
